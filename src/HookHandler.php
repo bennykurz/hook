@@ -37,20 +37,29 @@ class HookHandler
      */
     private static $debug = false;
 
+    /**
+     * If debug is activated, trigger will throw the N86io\Hook\HookNotFoundException exception, if no hooks registered
+     * or hook with given name not registered.
+     */
     public static function activateDebug()
     {
         static::$debug = true;
     }
 
+    /**
+     * Deactivate debug. See activateDebug().
+     */
     public static function deactivateDebug()
     {
         static::$debug = false;
     }
 
     /**
-     * @param string   $name
-     * @param callable $callable
-     * @param int      $priority
+     * Register a hook.
+     *
+     * @param string   $name     The hook name.
+     * @param callable $callable A valid PHP callable (http://php.net/manual/language.types.callable.php).
+     * @param int      $priority Priority of hook-calling of hooks with same name.
      */
     public static function register(string $name, callable $callable, int $priority = 0)
     {
@@ -64,8 +73,10 @@ class HookHandler
     }
 
     /**
-     * @param string $name
-     * @param array  ...$params
+     * Trigger a registered hook.
+     *
+     * @param string $name      The hook name.
+     * @param array  ...$params Parameters who are should pass to the callable.
      *
      * @throws HookNotFoundException
      */
