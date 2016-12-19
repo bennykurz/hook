@@ -22,13 +22,14 @@ namespace N86io\Hook\Tests\Unit;
 
 use N86io\Hook\HookHandler;
 use N86io\Hook\HookNotFoundException;
+use PHPUnit\Framework\TestCase;
 
 /**
  * Class HookHandler
  *
  * @author Viktor Firus <v@n86.io>
  */
-class HookHandlerTest extends \PHPUnit_Framework_TestCase
+class HookHandlerTest extends TestCase
 {
     public function testException1()
     {
