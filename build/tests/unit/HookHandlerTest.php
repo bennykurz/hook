@@ -32,9 +32,15 @@ class HookHandlerTest extends \PHPUnit_Framework_TestCase
 {
     public function testException1()
     {
+        HookHandler::deactivateDebug();
+        HookHandler::trigger('invHook');
+
+        HookHandler::activateDebug();
         $this->expectException(HookNotFoundException::class);
         $this->expectExceptionMessage('There are no hooks to trigger.');
         HookHandler::trigger('invHook');
+
+        HookHandler::deactivateDebug();
     }
 
     public function test()
@@ -65,8 +71,14 @@ class HookHandlerTest extends \PHPUnit_Framework_TestCase
 
     public function testException2()
     {
+        HookHandler::deactivateDebug();
+        HookHandler::trigger('invHook');
+
+        HookHandler::activateDebug();
         $this->expectException(HookNotFoundException::class);
         $this->expectExceptionMessage('Can\' found hooks called "invHook".');
         HookHandler::trigger('invHook');
+
+        HookHandler::deactivateDebug();
     }
 }

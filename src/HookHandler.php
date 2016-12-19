@@ -33,9 +33,24 @@ class HookHandler
     private static $hooks = [];
 
     /**
-     * @param string $name
+     * @var bool
+     */
+    private static $debug = false;
+
+    public static function activateDebug()
+    {
+        static::$debug = true;
+    }
+
+    public static function deactivateDebug()
+    {
+        static::$debug = false;
+    }
+
+    /**
+     * @param string   $name
      * @param callable $callable
-     * @param int $priority
+     * @param int      $priority
      */
     public static function register(string $name, callable $callable, int $priority = 0)
     {
@@ -50,16 +65,25 @@ class HookHandler
 
     /**
      * @param string $name
-     * @param array ...$params
+     * @param array  ...$params
+     *
      * @throws HookNotFoundException
      */
     public static function trigger(string $name, ...$params)
     {
         if (empty(static::$hooks)) {
-            throw new HookNotFoundException('There are no hooks to trigger.');
+            if (static::$debug) {
+                throw new HookNotFoundException('There are no hooks to trigger.');
+            }
+
+            return;
         }
         if (empty(static::$hooks[$name])) {
-            throw new HookNotFoundException('Can\' found hooks called "' . $name . '".');
+            if (static::$debug) {
+                throw new HookNotFoundException('Can\' found hooks called "' . $name . '".');
+            }
+
+            return;
         }
         krsort(static::$hooks[$name]);
         foreach (static::$hooks[$name] as $sortedOnPriority) {
