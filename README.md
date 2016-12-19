@@ -6,19 +6,4 @@
 [![Packagist](https://img.shields.io/packagist/l/n86io/hook.svg?style=flat-square)](https://packagist.org/packages/n86io/hook)
 ![PHP](https://img.shields.io/badge/PHP-7.0%2C%207.1-blue.svg?style=flat-square)
 
-# N86io/Rest
-
-Integrate on simple way hooks into your code.
-
-### Example
-
-    $callable = function (string $param1, int $param2) {
-        ... do something ...
-    };
-    \N86io\Hook\HookHandler::register('hookName‘, $callable, -5);
-
-The hook itself should be a valid PHP callable. See for it in [PHP documentation](http://php.net/manual/language.types.callable.php).
-
-On place, who the hook should be executed, just use the trigger function.
-
-    \N86io\Hook\HookHandler::trigger('hookName', 'param1', 2);
+[Here goes to documentation.](http://hook.readthedocs.io/en/latest/)
