@@ -26,11 +26,15 @@ namespace N86io\Hook;
 class HookHandler
 {
     /**
+     * Array, where hooks are stored.
+     *
      * @var array
      */
     private static $hooks = [];
 
     /**
+     * Debug activating flag.
+     *
      * @var bool
      */
     private static $debug = false;
@@ -61,10 +65,10 @@ class HookHandler
      */
     public static function register(string $name, callable $callable, int $priority = 0)
     {
-        if (empty(static::$hooks)) {
+        if (empty(static::$hooks) === true) {
             static::$hooks[$name] = [];
         }
-        if (empty(static::$hooks[$name][$priority])) {
+        if (empty(static::$hooks[$name][$priority]) === true) {
             static::$hooks[$name][$priority] = [];
         }
         static::$hooks[$name][$priority][] = $callable;
@@ -80,15 +84,15 @@ class HookHandler
      */
     public static function trigger(string $name, ...$params)
     {
-        if (empty(static::$hooks)) {
-            if (static::$debug) {
+        if (empty(static::$hooks) === true) {
+            if (static::$debug === true) {
                 throw new HookNotFoundException('There are no hooks to trigger.');
             }
 
             return;
         }
-        if (empty(static::$hooks[$name])) {
-            if (static::$debug) {
+        if (empty(static::$hooks[$name]) === true) {
+            if (static::$debug === true) {
                 throw new HookNotFoundException('Can\' found hooks called "' . $name . '".');
             }
 
