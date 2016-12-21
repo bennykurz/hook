@@ -19,9 +19,10 @@
 namespace N86io\Hook;
 
 /**
- * Class HookHandler
+ * Register hooks with this class and execute them on place, who are need them.
  *
  * @author Viktor Firus <v@n86.io>
+ * @since  1.0.0
  */
 class HookHandler
 {
@@ -42,6 +43,8 @@ class HookHandler
     /**
      * If debug is activated, trigger will throw the N86io\Hook\HookNotFoundException exception, if no hooks registered
      * or hook with given name not registered.
+     *
+     * @since 1.1.0
      */
     public static function activateDebug()
     {
@@ -50,6 +53,8 @@ class HookHandler
 
     /**
      * Deactivate debug. See activateDebug().
+     *
+     * @since 1.1.0
      */
     public static function deactivateDebug()
     {
@@ -62,13 +67,15 @@ class HookHandler
      * @param string   $name     The hook name.
      * @param callable $callable A valid PHP callable (http://php.net/manual/language.types.callable.php).
      * @param int      $priority Priority of hook-calling of hooks with same name.
+     *
+     * @since 1.0.0
      */
     public static function register(string $name, callable $callable, int $priority = 0)
     {
-        if (empty(static::$hooks) === true) {
+        if (empty(static::$hooks)) {
             static::$hooks[$name] = [];
         }
-        if (empty(static::$hooks[$name][$priority]) === true) {
+        if (empty(static::$hooks[$name][$priority])) {
             static::$hooks[$name][$priority] = [];
         }
         static::$hooks[$name][$priority][] = $callable;
@@ -81,18 +88,20 @@ class HookHandler
      * @param array  ...$params Parameters who are should pass to the callable.
      *
      * @throws HookNotFoundException
+     *
+     * @since 1.0.0
      */
     public static function trigger(string $name, ...$params)
     {
-        if (empty(static::$hooks) === true) {
-            if (static::$debug === true) {
+        if (empty(static::$hooks)) {
+            if (static::$debug) {
                 throw new HookNotFoundException('There are no hooks to trigger.');
             }
 
             return;
         }
-        if (empty(static::$hooks[$name]) === true) {
-            if (static::$debug === true) {
+        if (empty(static::$hooks[$name])) {
+            if (static::$debug) {
                 throw new HookNotFoundException('Can\' found hooks called "' . $name . '".');
             }
 

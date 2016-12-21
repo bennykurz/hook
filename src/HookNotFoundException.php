@@ -22,6 +22,7 @@ namespace N86io\Hook;
  * Class HookNotFoundException
  *
  * @author Viktor Firus <v@n86.io>
+ * @since  1.0.0
  */
 class HookNotFoundException extends \Exception
 {
