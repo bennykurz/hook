@@ -1,20 +1,20 @@
 Welcome to n86io/hook's documentation!
 ======================================
 
-Integrate on simple way hooks into your php-code.
+A simple way of integrating hooks into your php-code.
 
 Install
 =======
 
-For using this packages, please read `composer documentation
-<https://getcomposer.org/doc>`_ how to use composer and packages for it.
+In order to use these packages, please read `composer documentation
+<https://getcomposer.org/doc>`_ on how to use composer and packages for it.
 
 Package name for this hook package is ``n86io/hook``.
 
 Example
 =======
 
-Create first a `callable <http://php.net/manual/language.types.callable.php>`_
+First, create a `callable <http://php.net/manual/language.types.callable.php>`_
 like this or similar::
 
   $callable = function (string $param1, int $param2) {
@@ -25,7 +25,7 @@ Then register it to ``HookHandler``::
 
   \N86io\Hook\HookHandler::register('hookName‘, $callable, -5);
 
-Finally trigger the hook at right place and pass needed parameters::
+Finally, trigger the hook at the right place and pass the required parameters::
 
   \N86io\Hook\HookHandler::trigger('hookName', 'param1', 2);
 
